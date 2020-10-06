@@ -1,4 +1,4 @@
-solution to cousera courseL discrete optimization
+solution to cousera course: discrete optimization
 
 combine use LP/MIP and some heuristic methods.
 
