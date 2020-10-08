@@ -99,7 +99,6 @@ def vrp_mip_solver(customers, customer_count, vehicle_count, vehicle_capacity, t
             # if len(vehicle_tours[k]) >= 2 and vehicle_tours[k][-1] == 0:
             if done:
                 break
-            print(vehicle_tours[k])
     return m.objective_value, status, vehicle_tours
 
 
