@@ -21,7 +21,6 @@ def mip_tsp(points, time_threshold=None):
     m.mu = m.continuous_var_list(nodeCount,lb=0,name='mu')
 
     #add sum_xij=1 for all j
-    jtuple = (0,1,2,3,4)
     for i in range(nodeCount):
         m.add_constraint(m.sum(m.x[i,j] for j in range(nodeCount) if i != j) == 1, 'leave')
 
@@ -80,13 +79,19 @@ def solve_it(input_data):
     if len(points) <= 200:
         # solve it with mix integer programming
 
-        obj, opt, solution = mip_tsp(points, time_threshold=900)
+        obj, opt, solution = mip_tsp(points, time_threshold=1200)
     
-    if opt == 0 or len(points) > 200:
-        #solve it with 2-opt
+    if opt == 0:
+        
         solver = tsp_solver(solution=solution, points=points)
-        #time limit for the algorithm to stop
-        obj, opt, solution = solver.two_opt_solver(time_threshold=1800)
+
+        if len(points) < 1500:
+            #solve it with 2-opt
+            #time limit for the algorithm to stop
+            obj, opt, solution = solver.two_opt_solver(time_threshold=1200)
+        else:
+             obj, opt, solution = solver.greedy()
+           
     
     # prepare the solution in the specified output format
     output_data = '%.2f' % obj + ' ' + str(opt) + '\n'

@@ -47,7 +47,7 @@ class tsp_solver():
         cycle.append(0)
         self.cycle = cycle
         self.obj_val = self.cycle_length()
-        return self.obj_val, self.opt, self.cycle
+        return self.obj_val, self.opt, self.cycle[:-1]
 
     def swap(self, start, end):
         improved = False
