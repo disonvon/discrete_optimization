@@ -75,7 +75,7 @@ def solve_it(input_data):
         customers.append(Customer(i-1-facility_count, int(parts[0]), Point(float(parts[1]), float(parts[2]))))
 
     #solve it with mip
-    obj, opt, solution = facility_solver(facility_count, customer_count, facilities, customers, time_threshold=900)
+    obj, opt, solution = facility_solver(facility_count, customer_count, facilities, customers, time_threshold=1800)
     output_data = '%.2f' % obj + ' ' + str(opt) + '\n'
     output_data += ' '.join(map(str, solution))
 
